@@ -1,0 +1,16 @@
+# Cloudflare Pages configuration
+# Note: This is for reference only. Deploy via GitHub integration or wrangler pages deploy
+
+[site]
+bucket = "./dist"
+
+[vars]
+# Production environment variables
+# Set these in Cloudflare Pages dashboard: Settings > Environment Variables
+
+# VITE_FUEL_API_BASE_URL = "https://jedach-fuel-api.mapasenul.workers.dev/api"
+
+# Build configuration
+[build]
+command = "npm run build"
+preview_command = "npm run dev"

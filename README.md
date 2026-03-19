@@ -71,6 +71,30 @@ VITE_FUEL_API_BASE_URL=https://jedach-fuel-api.mapasenul.workers.dev/api
 
 ---
 
+## DEPLOY TO CLOUDFLARE PAGES
+
+**Via GitHub integration (recommended):**
+
+1. Go to https://pages.cloudflare.com
+2. New Project → Connect to Git → Select `SenulMapa/TankaPWA`
+3. Build settings:
+   - **Framework preset:** Vite
+   - **Build command:** `npm run build`
+   - **Build output directory:** `dist`
+   - **Root directory:** `/`
+4. Environment variables (Settings → Environment Variables):
+   - `VITE_FUEL_API_BASE_URL` = `https://jedach-fuel-api.mapasenul.workers.dev/api`
+5. Deploy
+
+**Via CLI:**
+
+```bash
+npm run build
+npx wrangler pages deploy dist --project-name=tanka
+```
+
+---
+
 ## KNOWN_LIMITATIONS
 
 Be transparent:
