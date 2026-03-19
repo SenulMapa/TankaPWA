@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { motion } from 'motion/react';
-import { TrendingUp, CheckCircle, Zap, Loader2 } from 'lucide-react';
-import { FUEL_LOGS, getUserProfile, QUOTA_LIMITS } from '@/src/constants';
+import { Zap, Loader2 } from 'lucide-react';
+import { getUserProfile, QUOTA_LIMITS } from '@/src/constants';
 import { predictNextFillup } from '@/src/services/fuelService';
 import { UserProfile } from '@/src/types';
 
@@ -35,7 +35,7 @@ export const Track: React.FC = () => {
     >
       <div className="absolute inset-0 data-grid-overlay pointer-events-none"></div>
 
-      {/* Consumption Overview */}
+      {/* Consumption Overview - Coming Soon */}
       <section className="mb-8 sm:mb-12 relative z-10">
         <div className="flex flex-col md:flex-row md:items-end justify-between mb-6 sm:mb-8 gap-4">
           <div>
@@ -43,33 +43,13 @@ export const Track: React.FC = () => {
             <h1 className="font-headline font-bold text-4xl sm:text-5xl md:text-6xl text-primary leading-none tracking-tighter">ANALYTICS.CORE</h1>
           </div>
           <div className="text-right">
-            <span className="font-mono text-tertiary text-[10px] tracking-widest bg-tertiary/10 px-2 py-1 border border-tertiary/20">SYSTEM_OPTIMAL</span>
+            <span className="font-mono text-tertiary text-[10px] tracking-widest bg-tertiary/10 px-2 py-1 border border-tertiary/20">COMING_SOON</span>
           </div>
         </div>
 
-        <div className="grid grid-cols-2 gap-px bg-outline-variant/20 border border-outline-variant/20">
-          <div className="bg-surface-container p-4 sm:p-6">
-            <p className="font-headline text-[9px] sm:text-xs text-on-surface-variant tracking-widest mb-4 uppercase">Monthly Spend</p>
-            <div className="flex items-baseline gap-1 sm:gap-2">
-              <span className="font-headline font-bold text-4xl sm:text-5xl md:text-6xl text-on-surface tracking-tighter">42,850</span>
-              <span className="font-headline font-medium text-sm sm:text-xl text-outline tracking-tight">LKR</span>
-            </div>
-            <div className="mt-3 sm:mt-4 flex items-center gap-1 sm:gap-2 text-error text-[9px] sm:text-xs font-mono">
-              <TrendingUp className="w-3 h-3 sm:w-4 sm:h-4" />
-              <span>+12.4% FROM PREVIOUS CYCLE</span>
-            </div>
-          </div>
-          <div className="bg-surface-container p-4 sm:p-6 border-l border-outline-variant/20">
-            <p className="font-headline text-[9px] sm:text-xs text-on-surface-variant tracking-widest mb-4 uppercase">Avg Consumption</p>
-            <div className="flex items-baseline gap-1 sm:gap-2">
-              <span className="font-headline font-bold text-4xl sm:text-5xl md:text-6xl text-on-surface tracking-tighter">08.2</span>
-              <span className="font-headline font-medium text-sm sm:text-xl text-outline tracking-tight">L/100KM</span>
-            </div>
-            <div className="mt-3 sm:mt-4 flex items-center gap-1 sm:gap-2 text-tertiary text-[9px] sm:text-xs font-mono">
-              <CheckCircle className="w-3 h-3 sm:w-4 sm:h-4" />
-              <span>BELOW VEHICLE AVERAGE</span>
-            </div>
-          </div>
+        <div className="border border-outline-variant/20 bg-surface-container-low p-8 text-center">
+          <p className="font-headline font-bold text-xl text-outline uppercase tracking-widest mb-2">Coming Soon</p>
+          <p className="text-xs text-outline-variant">Consumption metrics and analytics will appear here once you start logging fill-ups</p>
         </div>
       </section>
 
@@ -121,40 +101,15 @@ export const Track: React.FC = () => {
         </div>
       </section>
 
-      {/* Recent Logs */}
+      {/* Recent Logs - Coming Soon */}
       <section className="mb-16 sm:mb-20 relative z-10">
         <div className="flex items-center justify-between mb-4 sm:mb-6 border-b border-outline-variant/20 pb-3 sm:pb-4">
           <h3 className="font-headline font-bold text-lg sm:text-2xl tracking-tight">RECENT_LOGS</h3>
-          <button className="font-headline text-[9px] sm:text-xs tracking-widest text-primary border border-primary/20 px-3 sm:px-4 py-1.5 sm:py-2 hover:bg-primary/10 transition-colors uppercase">
-            Export_CSV
-          </button>
+          <span className="font-mono text-[9px] sm:text-xs tracking-widest text-outline uppercase">COMING_SOON</span>
         </div>
-        <div className="overflow-x-auto">
-          <table className="w-full text-left font-mono text-xs sm:text-sm">
-            <thead>
-              <tr className="text-outline border-b border-outline-variant/20">
-                <th className="py-3 sm:py-4 font-normal tracking-widest uppercase text-[9px] sm:text-xs">Entry_Date</th>
-                <th className="py-3 sm:py-4 font-normal tracking-widest uppercase text-[9px] sm:text-xs">Fuel_Vol</th>
-                <th className="py-3 sm:py-4 font-normal tracking-widest uppercase text-[9px] sm:text-xs">Trans_Cost</th>
-                <th className="py-3 sm:py-4 font-normal tracking-widest uppercase text-[9px] sm:text-xs text-right">Unit_Price</th>
-              </tr>
-            </thead>
-            <tbody className="divide-y divide-outline-variant/10">
-              {FUEL_LOGS.map((log) => (
-                <tr key={log.id} className="hover:bg-surface-container-low transition-colors group">
-                  <td className="py-3 sm:py-5 text-on-surface">{log.date}</td>
-                  <td className="py-3 sm:py-5 text-on-surface">{log.volume.toFixed(2)} L</td>
-                  <td className="py-3 sm:py-5 text-primary">{log.cost.toLocaleString('en-LK', { minimumFractionDigits: 2 })} LKR</td>
-                  <td className="py-3 sm:py-5 text-outline text-right">{log.unitPrice.toFixed(2)}</td>
-                </tr>
-              ))}
-            </tbody>
-          </table>
-        </div>
-        <div className="mt-6 sm:mt-8 flex justify-center">
-          <button className="bg-surface-container-high text-on-surface border border-outline-variant px-6 sm:px-8 py-3 sm:py-4 font-headline font-bold text-[9px] sm:text-sm tracking-[0.2em] hover:bg-surface-bright transition-all active:scale-95 uppercase">
-            Load_More_Entries
-          </button>
+        <div className="border border-outline-variant/20 bg-surface-container-low p-8 text-center">
+          <p className="font-headline font-bold text-xl text-outline uppercase tracking-widest mb-2">Coming Soon</p>
+          <p className="text-xs text-outline-variant">Fuel log history and export functionality will appear here</p>
         </div>
       </section>
     </motion.div>

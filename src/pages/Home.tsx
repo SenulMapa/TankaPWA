@@ -164,22 +164,10 @@ export const Home: React.FC = () => {
         </p>
       </section>
 
-      {/* Stats Grid */}
-      <div className="grid grid-cols-2 gap-px bg-outline-variant/20 border border-outline-variant/20">
-        <div className="bg-[#0E0E0E] p-3 sm:p-4">
-          <p className="text-[8px] sm:text-[10px] text-outline uppercase mb-1 font-mono">National Stock</p>
-          <div className="flex items-end gap-1.5 sm:gap-2">
-            <span className="text-xl sm:text-2xl font-headline font-bold text-on-surface">1.2M</span>
-            <span className="text-[8px] sm:text-[10px] text-tertiary font-mono mb-1">MT</span>
-          </div>
-        </div>
-        <div className="bg-[#0E0E0E] p-3 sm:p-4">
-          <p className="text-[8px] sm:text-[10px] text-outline uppercase mb-1 font-mono">Active Pumps</p>
-          <div className="flex items-end gap-1.5 sm:gap-2">
-            <span className="text-xl sm:text-2xl font-headline font-bold text-on-surface">92</span>
-            <span className="text-[8px] sm:text-[10px] text-tertiary font-mono mb-1">%</span>
-          </div>
-        </div>
+      {/* Coming Soon Card */}
+      <div className="border border-outline-variant/20 bg-surface-container-low p-6 text-center">
+        <p className="font-headline font-bold text-xl text-outline uppercase tracking-widest mb-2">Coming Soon</p>
+        <p className="text-xs text-outline-variant">National stock metrics and active pump counts will appear here</p>
       </div>
 
       {/* Nearest Stations */}

@@ -41,13 +41,13 @@ export function isPlateEligible(plateNumber: string): boolean {
 export function getNextEligibleDate(plateNumber: string): Date {
   const today = new Date();
   const lastDigit = parseInt(plateNumber.slice(-1));
-  
+
   for (let i = 1; i <= 31; i++) {
     const nextDate = new Date(today);
     nextDate.setDate(today.getDate() + i);
     const isEven = nextDate.getDate() % 2 === 0;
     const digitEven = lastDigit % 2 === 0;
-    
+
     if ((isEven && digitEven) || (!isEven && !digitEven)) {
       return nextDate;
     }
@@ -68,70 +68,3 @@ export function daysUntil(date: Date): number {
 export function isWednesday(): boolean {
   return new Date().getDay() === 3;
 }
-
-export const STATIONS: FuelStation[] = [
-  {
-    id: 'STATION_LK_COL_0042',
-    name: 'LANKA IOC - KOLLUPITIYA',
-    operator: 'LIOC',
-    location: 'Kollupitiya',
-    distance: '2.8 KM',
-    lat: 6.9128,
-    lng: 79.8507,
-    status: 'AVAILABLE',
-    fuels: [
-      { type: '92_OCTANE_PETROL', available: true, amount: 4200 },
-      { type: '95_OCTANE_PREMIUM', available: false, amount: 0 },
-      { type: 'SUPER_DIESEL', available: true, amount: 1250 },
-    ],
-    queueLength: '400M',
-    lastReport: '10_MINS_AGO_USER_0921',
-  },
-  {
-    id: 'STATION_LK_COL_0012',
-    name: 'Ceypetco',
-    operator: 'CEYPETCO',
-    location: 'Bambalapitiya',
-    distance: '0.4 KM',
-    lat: 6.8981,
-    lng: 79.8550,
-    status: 'AVAILABLE',
-    fuels: [
-      { type: '92_OCTANE_PETROL', available: true },
-      { type: 'DIESEL', available: true },
-    ],
-    queueLength: '150M',
-    lastReport: '5_MINS_AGO_USER_0882',
-  },
-  {
-    id: 'STATION_LK_COL_0088',
-    name: 'Sinopec',
-    operator: 'SINOPEC',
-    location: 'Wellawatte',
-    distance: '1.2 KM',
-    lat: 6.8820,
-    lng: 79.8600,
-    status: 'UNAVAILABLE',
-    fuels: [
-      { type: '95_OCTANE_PREMIUM', available: false },
-      { type: 'SUPER_DIESEL', available: false },
-    ],
-    queueLength: '0M',
-    lastReport: '1_HOUR_AGO_USER_0771',
-  },
-];
-
-export const FUEL_LOGS: FuelLog[] = [
-  { id: '1', date: '2023.OCT.24', volume: 32.40, cost: 12450.00, unitPrice: 384.25 },
-  { id: '2', date: '2023.OCT.18', volume: 40.15, cost: 15417.00, unitPrice: 384.00 },
-  { id: '3', date: '2023.OCT.10', volume: 15.20, cost: 5840.00, unitPrice: 384.21 },
-  { id: '4', date: '2023.OCT.02', volume: 24.80, cost: 9143.00, unitPrice: 368.67 },
-];
-
-// Default quota display (will be overridden by user profile)
-export const DEFAULT_QUOTA: UserQuota = {
-  vehicleNo: 'CAB-1234',
-  fuelType: 'DIESEL',
-  remaining: 20.00,
-  limit: 60,
-};
