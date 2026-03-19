@@ -1,28 +1,28 @@
 import React, { useEffect, useState } from 'react';
-import { MapPin, Calendar, AlertTriangle, CheckCircle2, XCircle } from 'lucide-react';
+import { MapPin, Calendar, AlertTriangle, CheckCircle2, XCircle, Megaphone } from 'lucide-react';
 import { motion } from 'motion/react';
 import { cn } from '@/src/lib/utils';
 import { FuelStation } from '@/src/types';
-import { fetchNearbyStations, getDailyBriefing } from '@/src/services/fuelService';
-import { 
-  getUserProfile, 
-  isPlateEligible, 
-  getNextEligibleDate, 
-  daysUntil, 
+import { fetchNearbyStations } from '@/src/services/fuelService';
+import {
+  getUserProfile,
+  isPlateEligible,
+  getNextEligibleDate,
+  daysUntil,
   isWednesday,
-  isEvenDay 
+  isEvenDay
 } from '@/src/constants';
+import { useNavigate } from 'react-router-dom';
 
 export const Home: React.FC = () => {
   const [stations, setStations] = useState<FuelStation[]>([]);
-  const [briefing, setBriefing] = useState<string>('');
-  const [briefingTime, setBriefingTime] = useState<string>('');
   const [isLoading, setIsLoading] = useState(true);
   const [eligible, setEligible] = useState<boolean>(true);
   const [plateNumber, setPlateNumber] = useState<string>('');
   const [nextEligible, setNextEligible] = useState<Date | null>(null);
   const [isWed, setIsWed] = useState(false);
   const [evenDay, setEvenDay] = useState(false);
+  const navigate = useNavigate();
 
   useEffect(() => {
     const profile = getUserProfile();
@@ -50,10 +50,6 @@ export const Home: React.FC = () => {
         const nearby = await fetchNearbyStations(6.9271, 79.8612, 50);
         setStations(nearby.slice(0, 3));
       });
-
-      const { message, date } = getDailyBriefing();
-      setBriefing(message);
-      setBriefingTime(date);
 
       setIsLoading(false);
     };
@@ -149,22 +145,29 @@ export const Home: React.FC = () => {
         )}
       </motion.div>
 
-      {/* Daily Fuel Briefing */}
+      {/* Coming Soon - Daily Briefing */}
       <section className="border border-outline-variant/30 bg-surface-container p-4 sm:p-6 relative overflow-hidden">
         <div className="absolute top-0 left-0 w-1 h-full bg-primary-container"></div>
         <div className="flex justify-between items-start mb-3 sm:mb-4">
-          <span className="text-[8px] sm:text-[10px] font-mono tracking-[0.2em] text-outline uppercase">Daily Briefing // {briefingTime}</span>
-          <span className="bg-primary/10 text-primary-container px-1.5 sm:px-2 py-0.5 text-[8px] sm:text-[10px] font-bold border border-primary/20">LIVE_DATA</span>
+          <span className="text-[8px] sm:text-[10px] font-mono tracking-[0.2em] text-outline uppercase">Daily Briefing</span>
+          <span className="bg-outline/10 text-outline px-1.5 sm:px-2 py-0.5 text-[8px] sm:text-[10px] font-bold border border-outline/20">COMING_SOON</span>
         </div>
         <h2 className="font-headline font-bold text-3xl sm:text-4xl leading-none text-primary-container mb-3 sm:mb-4 tracking-tighter">
           FUEL STATUS <br/> UPDATE.
         </h2>
-        <p className="text-on-surface-variant text-xs sm:text-sm leading-relaxed">
-          {briefing}
+        <p className="text-on-surface-variant text-xs sm:text-sm leading-relaxed mb-4">
+          Real-time fuel availability briefings powered by crowdsource reports and partner data will appear here.
         </p>
+        <button
+          onClick={() => navigate('/map')}
+          className="w-full bg-primary-container text-on-primary font-mono text-[10px] font-bold px-4 py-3 hover:opacity-90 active:scale-95 transition-all uppercase tracking-widest flex items-center justify-center gap-2"
+        >
+          <Megaphone className="w-4 h-4" />
+          Report Station Status
+        </button>
       </section>
 
-      {/* Coming Soon Card */}
+      {/* Coming Soon - National Stats */}
       <div className="border border-outline-variant/20 bg-surface-container-low p-6 text-center">
         <p className="font-headline font-bold text-xl text-outline uppercase tracking-widest mb-2">Coming Soon</p>
         <p className="text-xs text-outline-variant">National stock metrics and active pump counts will appear here</p>
