@@ -1,28 +1,15 @@
 import React, { useEffect, useState } from 'react';
 import { motion } from 'motion/react';
-import { Zap, Loader2 } from 'lucide-react';
+import { Zap } from 'lucide-react';
 import { getUserProfile, QUOTA_LIMITS } from '@/src/constants';
-import { predictNextFillup } from '@/src/services/fuelService';
 import { UserProfile } from '@/src/types';
 
 export const Track: React.FC = () => {
-  const [prediction, setPrediction] = useState<string>('');
-  const [daysUntil, setDaysUntil] = useState<number>(7);
-  const [isLoading, setIsLoading] = useState(true);
   const [profile, setProfile] = useState<UserProfile | null>(null);
 
   useEffect(() => {
     const userProfile = getUserProfile();
     setProfile(userProfile);
-
-    const loadPrediction = async () => {
-      setIsLoading(true);
-      const result = predictNextFillup(FUEL_LOGS);
-      setPrediction(result.prediction);
-      setDaysUntil(result.days);
-      setIsLoading(false);
-    };
-    loadPrediction();
   }, []);
 
   const monthlyLimit = profile ? QUOTA_LIMITS[profile.vehicleType] : 60;
@@ -53,7 +40,7 @@ export const Track: React.FC = () => {
         </div>
       </section>
 
-      {/* Prediction Card */}
+      {/* Prediction Card - Coming Soon */}
       <section className="mb-8 sm:mb-12 relative z-10">
         <div className="border-2 border-primary-container bg-surface-container-lowest p-4 sm:p-6 relative overflow-hidden">
           <div className="absolute top-0 right-0 w-32 h-32 bg-primary-container/10 blur-3xl rounded-full -mr-16 -mt-16"></div>
@@ -63,41 +50,13 @@ export const Track: React.FC = () => {
             </div>
             <div>
               <h3 className="font-headline font-bold text-primary-container text-base sm:text-lg tracking-tight uppercase">PREDICTIVE_ENGINE</h3>
-              <p className="text-[9px] sm:text-xs font-mono text-outline uppercase tracking-widest">Algorithm_V1.0 // Pattern_Analysis</p>
+              <p className="text-[9px] sm:text-xs font-mono text-outline uppercase tracking-widest">COMING_SOON</p>
             </div>
           </div>
-
-          {isLoading ? (
-            <div className="flex items-center gap-3 py-6 sm:py-8">
-              <Loader2 className="w-5 h-5 sm:w-6 sm:h-6 animate-spin text-primary-container" />
-              <span className="font-mono text-[9px] sm:text-xs uppercase tracking-widest text-outline">Analyzing consumption patterns...</span>
-            </div>
-          ) : (
-            <div className="space-y-3 sm:space-y-4">
-              <div className="bg-surface-container-high border-l-4 border-primary p-3 sm:p-4">
-                <p className="text-on-surface font-medium text-sm sm:text-lg leading-snug">
-                  {prediction}
-                </p>
-                <p className="text-on-surface-variant text-[10px] sm:text-sm mt-2">
-                  Based on your fill-up history pattern
-                </p>
-              </div>
-              <div className="flex flex-wrap gap-2 sm:gap-3">
-                <div className="bg-surface-container p-2 sm:p-3 flex flex-col gap-1 border border-outline-variant/20 min-w-[120px]">
-                  <span className="text-[8px] sm:text-[10px] text-outline tracking-widest uppercase">Next In</span>
-                  <span className="font-mono text-primary-container font-bold text-lg sm:text-xl">{daysUntil} Days</span>
-                </div>
-                <div className="bg-surface-container p-2 sm:p-3 flex flex-col gap-1 border border-outline-variant/20 min-w-[120px]">
-                  <span className="text-[8px] sm:text-[10px] text-outline tracking-widest uppercase">Monthly Limit</span>
-                  <span className="font-mono text-primary-container font-bold text-lg sm:text-xl">{monthlyLimit}L</span>
-                </div>
-                <div className="bg-surface-container p-2 sm:p-3 flex flex-col gap-1 border border-outline-variant/20 min-w-[120px]">
-                  <span className="text-[8px] sm:text-[10px] text-outline tracking-widest uppercase">Est. Wait</span>
-                  <span className="font-mono text-primary-container font-bold text-lg sm:text-xl">4-6 MIN</span>
-                </div>
-              </div>
-            </div>
-          )}
+          <div className="border border-outline-variant/20 bg-surface-container-low p-6 text-center">
+            <p className="font-headline font-bold text-xl text-outline uppercase tracking-widest mb-2">Coming Soon</p>
+            <p className="text-xs text-outline-variant">AI-powered fill-up predictions will appear here once you start logging fuel-ups</p>
+          </div>
         </div>
       </section>
 
