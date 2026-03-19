@@ -1,0 +1,5 @@
+{
+  "name": "Tanka Terminal",
+  "description": "A high-performance industrial fuel management dashboard for the National Fuel Pass system, featuring real-time telemetry, QR identification, and AI-driven consumption analytics.",
+  "requestFramePermissions": ["geolocation"]
+}

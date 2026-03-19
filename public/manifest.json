@@ -1,0 +1,17 @@
+{
+  "name": "TANKA OH",
+  "short_name": "TANKA",
+  "description": "Sri Lanka's fuel management PWA. Track availability. Manage your quota. Don't run dry.",
+  "start_url": "/",
+  "display": "standalone",
+  "background_color": "#0a0a0a",
+  "theme_color": "#F5A623",
+  "icons": [
+    {
+      "src": "/icon-512.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "any maskable"
+    }
+  ]
+}
